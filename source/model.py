@@ -1,11 +1,11 @@
 # Import the Speech-to-Text client library
 # from google.cloud import aiplatform
-import vertexai
-from vertexai.language_models import TextGenerationModel
+#import vertexai
+#from vertexai.language_models import TextGenerationModel
 import openai
 import os
-from google.cloud import speech
-from google.cloud import texttospeech
+#from google.cloud import speech
+#from google.cloud import texttospeech
 
 openai.api_key = os.environ["API_KEY"]
 
