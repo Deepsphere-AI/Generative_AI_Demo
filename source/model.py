@@ -6,9 +6,10 @@ import openai
 import os
 
 
-
+# openAI Key 
 openai.api_key = os.environ["API_KEY"]
 
+# GPT-4 model 
 def generate_response4(prompt):
     response = openai.ChatCompletion.create(
     model="gpt-4",
@@ -20,7 +21,8 @@ def generate_response4(prompt):
     presence_penalty=0.6,
     )
     return response['choices'][0]['message']['content']
-
+ 
+# GPT- 3.5 model
 def generate_response3_5(prompt):
     response = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
@@ -33,6 +35,7 @@ def generate_response3_5(prompt):
     )
     return response['choices'][0]['message']['content']
 
+# GPT-3 model 
 def generate_response3(prompt):
     response = openai.Completion.create(
     model="text-davinci-003",
@@ -46,13 +49,11 @@ def generate_response3(prompt):
     )
     return response["choices"][0]["text"]
 
-
+# model for Text to Speech
 def model_tts(prompt,voice_out):
     from google.cloud import texttospeech
     client = texttospeech.TextToSpeechClient()
     input_text = texttospeech.SynthesisInput(text=prompt)
-    # Note: the voice can also be specified by name.
-    # Names of voices can be retrieved with client.list_voices().
     voice = texttospeech.VoiceSelectionParams(
         language_code="es-US",
         name=voice_out,
@@ -64,15 +65,15 @@ def model_tts(prompt,voice_out):
     response = client.synthesize_speech(
         request={"input": input_text, "voice": voice, "audio_config": audio_config}
     )
-    # The response's audio_content is binary.
     with open("result/output.mp3", "wb") as out:
         out.write(response.audio_content)
 
-
+# model for Speech to  Text
 def model_stt(audio_file):
     transcript = openai.Audio.translate("whisper-1", audio_file)
     return transcript['text']
 
+# model for image generation
 def model_img(prompt):
   response = openai.Image.create(
     prompt=prompt,
