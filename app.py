@@ -7,8 +7,6 @@ from PIL import Image
 import os
 from source.genAI import features
 
-# API Key
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "personalized-learning-340207-699519426800.json"
 
 st.set_page_config(layout="wide")
 st.markdown(
